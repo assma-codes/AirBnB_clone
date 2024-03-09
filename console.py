@@ -14,23 +14,23 @@ class HBNBCommand(cmd.Cmd):
 
     prompt = "(hbnb) "
     valid_classes = ["BaseModel"]
-    #---------------------------------------------------- 
+
     def do_quit(self, line):
         """Quit command to exit the program"""
         return True
-    #---------------------------------------------------- 
+
+    def do_emptyline(self):
+        """do no thing when pressing enter or empty line"""
+        pass
+
     def do_EOF(self, line):
         """Exiting the console <command interpretor>"""
         print()
         return True
-    #---------------------------------------------------- 
-    def do_emptyline(self):
-        """do no thing when pressing enter or empty line"""
-        pass
-    #---------------------------------------------------- 
+
     def default(self, line):
          print(f"Unknown command, {line}")
-    #---------------------------------------------------- 
+
     """def do_create(self, usr_input):
         commands = shlex.split(usr_input)
         if len(commands) == 0:
