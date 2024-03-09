@@ -1,11 +1,18 @@
 #!/usr/bin/python3
+""" implementing the HBNB console """
 import cmd
 import shlex
 #from models.base_model import BaseModel
 #from medels import storage
 
 class HBNBCommand(cmd.Cmd):
-    prompt = "hbnb >>> "
+    """Defines the command interpreter.
+
+    Attributes:
+        prompt (str): The command prompt.
+    """
+
+    prompt = "(hbnb) "
     valid_classes = ["BaseModel"]
     #---------------------------------------------------- 
     def do_quit(self, line):
