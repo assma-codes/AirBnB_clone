@@ -2,8 +2,8 @@
 """ implementing the HBNB console """
 import cmd
 import shlex
-#from models.base_model import BaseModel
-#from medels import storage
+from models.base_model import BaseModel
+from medels import storage
 
 class HBNBCommand(cmd.Cmd):
     """Defines the command interpreter.
@@ -19,6 +19,10 @@ class HBNBCommand(cmd.Cmd):
         """Quit command to exit the program"""
         return True
 
+    def help_quit(self):
+        """ help for quit command """
+        print("exiting prompt using quit command")
+
     def do_emptyline(self):
         """do no thing when pressing enter or empty line"""
         pass
@@ -31,7 +35,8 @@ class HBNBCommand(cmd.Cmd):
     def default(self, line):
          print(f"Unknown command, {line}")
 
-    """def do_create(self, usr_input):
+    def do_create(self, usr_input):
+        """ Creates a new instance of BaseModel, saves it (to the JSON file) and prints the id  """
         commands = shlex.split(usr_input)
         if len(commands) == 0:
             print("** class name missing **")
@@ -41,9 +46,9 @@ class HBNBCommand(cmd.Cmd):
             created_instance = BaseModel()
             created_instance.save()
             print(created_instance.id)  
-    """    
+       
     #----------------------------------------------------     
-    """ def do_show(self, usr_input):
+    """def do_show(self, usr_input):
         commands = shlex.split(usr_input)
         if len(commands) == 0:
             print("** class name missing **")
