@@ -2,6 +2,7 @@
 import json
 from models.base_model import BaseModel
 import os
+from models.user import User
 
 """Write a class FileStorage that serializes instances to a JSON file and deserializes JSON file to instances:"""
 class FileStorage():
