@@ -4,6 +4,7 @@ import cmd
 import shlex
 from models.base_model import BaseModel
 from models import storage
+from models.user import User
 
 class HBNBCommand(cmd.Cmd):
     """Defines the command interpreter.
@@ -23,7 +24,7 @@ class HBNBCommand(cmd.Cmd):
         """ help for quit command """
         print("exiting prompt using quit command")
 
-    def do_emptyline(self):
+    def emptyline(self):
         """do no thing when pressing enter or empty line"""
         pass
 
@@ -32,9 +33,9 @@ class HBNBCommand(cmd.Cmd):
         print(" ")
         return True
 
-    def default(self, line):
+    """def default(self, line):
          print(f"Unknown command, {line}")
-
+    """
     def do_create(self, usr_input):
         """ Creates a new instance of BaseModel, saves it (to the JSON file) and prints the id  """
         commands = shlex.split(usr_input)
@@ -43,8 +44,8 @@ class HBNBCommand(cmd.Cmd):
         elif commands[0] not in self.available_classes:
             print("** class doesn't exist **")
         else:
-            created_instance = BaseModel()
-            created_instance.save()
+            created_instance = eval(f"commands[0]()")
+            storage.save()
             print(created_instance.id)  
        
     #----------------------------------------------------     
