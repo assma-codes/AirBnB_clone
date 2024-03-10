@@ -3,7 +3,7 @@
 import cmd
 import shlex
 from models.base_model import BaseModel
-from medels import storage
+from models import storage
 
 class HBNBCommand(cmd.Cmd):
     """Defines the command interpreter.
@@ -48,7 +48,7 @@ class HBNBCommand(cmd.Cmd):
             print(created_instance.id)  
        
     #----------------------------------------------------     
-    """def do_show(self, usr_input):
+    def do_show(self, usr_input):
         commands = shlex.split(usr_input)
         if len(commands) == 0:
             print("** class name missing **")
@@ -63,7 +63,7 @@ class HBNBCommand(cmd.Cmd):
                 print(objects[key])
             else:
                 print("** no instance found **")
-    """
+
     #---------------------------------------------------- 
     """def do_destroy(self, usr_input):
         commands = shlex.split(usr_input)
