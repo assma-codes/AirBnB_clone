@@ -13,7 +13,7 @@ class HBNBCommand(cmd.Cmd):
     """
 
     prompt = "(hbnb) "
-    valid_classes = ["BaseModel"]
+    available_classes = ["BaseModel", "User"]
 
     def do_quit(self, line):
         """Quit command to exit the program"""
@@ -29,7 +29,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_EOF(self, line):
         """Exiting the console <command interpretor>"""
-        print()
+        print(" ")
         return True
 
     def default(self, line):
@@ -40,7 +40,7 @@ class HBNBCommand(cmd.Cmd):
         commands = shlex.split(usr_input)
         if len(commands) == 0:
             print("** class name missing **")
-        elif commands[0] not in self.valid_classes:
+        elif commands[0] not in self.available_classes:
             print("** class doesn't exist **")
         else:
             created_instance = BaseModel()
@@ -52,7 +52,7 @@ class HBNBCommand(cmd.Cmd):
         commands = shlex.split(usr_input)
         if len(commands) == 0:
             print("** class name missing **")
-        elif commands[0] not in self.valid_classes:
+        elif commands[0] not in self.available_classes:
             print("** class doesn't exist **")
         elif len(commands) < 2:
             print("** instance id missing **")
@@ -65,11 +65,11 @@ class HBNBCommand(cmd.Cmd):
                 print("** no instance found **")
 
     #---------------------------------------------------- 
-    """def do_destroy(self, usr_input):
+    def do_destroy(self, usr_input):
         commands = shlex.split(usr_input)
         if len(commands) == 0:
             print("** class name missing **")
-        elif commands[0] not in self.valid_classes:
+        elif commands[0] not in self.available_classes:
             print("** class doesn't exist **")
         elif len(commands) < 2:
             print("** instance id missing **")
@@ -81,27 +81,27 @@ class HBNBCommand(cmd.Cmd):
                 storage.save()
             else:
                 print("** no instance found **")
-    """
+    
     #---------------------------------------------------- 
-    """def do_all(self, usr_input):
+    def do_all(self, usr_input):
         objects = storage.all()
         commands = shlex.split(usr_input)
         if len(commands) == 0:
             for key, value in objects.items():
                 print(str(value))
-        elif commands[0] not in valid_classes:
+        elif commands[0] not in available_classes:
              print("** class doesn't exist **")
         else:
             for key, value in objects.items():
                 if key.split('.')(0) == commands[0]:
                     print(self.value)
-    """
+
     #---------------------------------------------------- 
-    """def do_update(self, usr_input):
+    def do_update(self, usr_input):
         commands = shlex.split(usr_input)
         if len(commands) == 0:
             print("** class name missing **")
-        elif commands[0] not in self.valid_classes:
+        elif commands[0] not in self.available_classes:
             print("** class doesn't exist **")
         elif len(commands) < 2:
             print("** instance id missing **")
@@ -110,7 +110,7 @@ class HBNBCommand(cmd.Cmd):
             key = "{}.{}.format(commands[0], commands[1])"
             if key not in objects:
                 print("** no instance found **")
-            elif len(commands) < 3
+            elif len(commands) < 3:
                 print("** attribute name missing **")
             else:
                 obj = objects[key]
@@ -122,7 +122,7 @@ class HBNBCommand(cmd.Cmd):
                     pass
                 setattr(obj, atrr_name, attr_value)
                 obj.save()
-    """
+
 #---------------------------------------------------- 
          
 if __name__ == '__main__':
