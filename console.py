@@ -6,9 +6,9 @@ from models.base_model import BaseModel
 from models import storage
 from models.user import User
 
+
 class HBNBCommand(cmd.Cmd):
     """Defines the command interpreter.
-
     Attributes:
         prompt (str): The command prompt.
     """
@@ -33,11 +33,13 @@ class HBNBCommand(cmd.Cmd):
         print(" ")
         return True
 
-    """def default(self, line):
-         print(f"Unknown command, {line}")
-    """
+    def default(self, line):
+        print(f"Unknown command, {line}")
+
     def do_create(self, usr_input):
-        """ Creates a new instance of BaseModel, saves it (to the JSON file) and prints the id  """
+        """Usage: create <class>
+        Create a new class instance and print its id.
+        """
         commands = shlex.split(usr_input)
         if len(commands) == 0:
             print("** class name missing **")
@@ -46,10 +48,12 @@ class HBNBCommand(cmd.Cmd):
         else:
             created_instance = eval(f"commands[0]()")
             storage.save()
-            print(created_instance.id)  
-       
-    #----------------------------------------------------     
+            print(created_instance.id)
+
     def do_show(self, usr_input):
+        """Usage: show <class> <id> or <class>.show(<id>
+        Display the string representation of a class instance of a given id.
+        """
         commands = shlex.split(usr_input)
         if len(commands) == 0:
             print("** class name missing **")
@@ -65,8 +69,10 @@ class HBNBCommand(cmd.Cmd):
             else:
                 print("** no instance found **")
 
-    #---------------------------------------------------- 
     def do_destroy(self, usr_input):
+        """Deletes an instance based on the class name and id.
+        Ex: $ destroy BaseModel 1234-1234-1234.
+        """
         commands = shlex.split(usr_input)
         if len(commands) == 0:
             print("** class name missing **")
@@ -82,23 +88,32 @@ class HBNBCommand(cmd.Cmd):
                 storage.save()
             else:
                 print("** no instance found **")
-    
-    #---------------------------------------------------- 
+
     def do_all(self, usr_input):
+        """prints all string representation of all
+        instance based or not on the class name and.
+        """
         objects = storage.all()
         commands = shlex.split(usr_input)
         if len(commands) == 0:
             for key, value in objects.items():
                 print(str(value))
+<<<<<<< HEAD
         elif commands[0] not in self.available_classes:
              print("** class doesn't exist **")
+=======
+        elif commands[0] not in available_classes:
+            print("** class doesn't exist **")
+>>>>>>> 0ad7ead06e98af82659925dec329f08a8d84c18d
         else:
             for key, value in objects.items():
                 if key.split('.')(0) == commands[0]:
                     print(self.value)
 
-    #---------------------------------------------------- 
     def do_update(self, usr_input):
+        """Updates an instance based on the class name and id
+        by adding or updating attribute
+        """
         commands = shlex.split(usr_input)
         if len(commands) == 0:
             print("** class name missing **")
@@ -126,7 +141,6 @@ class HBNBCommand(cmd.Cmd):
                 setattr(obj, attr_name, attr_value)
                 obj.save()
 
-#---------------------------------------------------- 
-         
+
 if __name__ == '__main__':
-     HBNBCommand().cmdloop()
+    HBNBCommand().cmdloop()
