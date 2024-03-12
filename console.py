@@ -59,7 +59,7 @@ class HBNBCommand(cmd.Cmd):
             print("** instance id missing **")
         else:
             objects = storage.all()
-            key = "{}.{}.format(commands[0], commands[1])"
+            key = f"{commands[0]}.{commands[1]}"
             if key in objects:
                 print(objects[key])
             else:
@@ -76,7 +76,7 @@ class HBNBCommand(cmd.Cmd):
             print("** instance id missing **")
         else:
             objects = storage.all()
-            key = "{}.{}.format(commands[0], commands[1])"
+            key = "{}.{}".format(commands[0], commands[1])
             if key in objects:
                 del object[key]
                 storage.save()
@@ -90,7 +90,7 @@ class HBNBCommand(cmd.Cmd):
         if len(commands) == 0:
             for key, value in objects.items():
                 print(str(value))
-        elif commands[0] not in available_classes:
+        elif commands[0] not in self.available_classes:
              print("** class doesn't exist **")
         else:
             for key, value in objects.items():
@@ -108,20 +108,22 @@ class HBNBCommand(cmd.Cmd):
             print("** instance id missing **")
         else:
             objects = storage.all()
-            key = "{}.{}.format(commands[0], commands[1])"
+            key = "{}.{}".format(commands[0], commands[1])
             if key not in objects:
                 print("** no instance found **")
             elif len(commands) < 3:
                 print("** attribute name missing **")
+            elif len(commands) < 4:
+                print("** value missing **")
             else:
                 obj = objects[key]
                 attr_name = commands[2]
                 attr_value = commands[3]
                 try:
-                    attr_value = eval[atrr_value]
+                    attr_value = eval[attr_name]
                 except Exception:
                     pass
-                setattr(obj, atrr_name, attr_value)
+                setattr(obj, attr_name, attr_value)
                 obj.save()
 
 #---------------------------------------------------- 

@@ -131,8 +131,8 @@ class TestFileStorage_methods(unittest.TestCase):
         models.storage.new(r_v)
         models.storage.save()
         save_text = ""
-        with open("file.json", "r") as f:
-            save_text = f.read()
+        with open("file.json", "r") as file:
+            save_text = file.read()
             self.assertIn("BaseModel." + b_m.id, save_text)
             self.assertIn("User." + u_s.id, save_text)
             self.assertIn("State." + s_t.id, save_text)
@@ -140,3 +140,6 @@ class TestFileStorage_methods(unittest.TestCase):
             self.assertIn("City." + c_y.id, save_text)
             self.assertIn("Amenity." + a_m.id, save_text)
             self.assertIn("Review." + r_v.id, save_text)
+
+if __name__ == "__main__":
+    unittest.main()

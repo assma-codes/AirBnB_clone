@@ -104,18 +104,20 @@ class TestBaseModel_save(unittest.TestCase):
         sleep(0.05)
         my_models.save()
         self.assertLess(second_updated_at, bm.updated_at)
+    
+    def test_save_updates_files(self):
+        my_models = BaseModel()
+        my_models.save()
+        my_models_id = "BaseModel." + my_models.id
+        with open("file.json", "r") as f:
+            self.assertIn(my_models_id, f.read())
+
 
     def test_save_with_arg(self):
         my_models = BaseModel()
         with self.assertRaises(TypeError):
             my_models.save(None)
 
-    def test_save_updates_file(self):
-        my_models = BaseModel()
-        my_models.save()
-        my_models_id = "BaseModel." + my_models.id
-        with open("file.json", "r") as f:
-            self.assertIn(my_models_id, f.read())
 
 
 if __name__ == '__main__':
