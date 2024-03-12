@@ -14,7 +14,7 @@ class HBNBCommand(cmd.Cmd):
     """
 
     prompt = "(hbnb) "
-    available_classes = ["BaseModel", "User"]
+    available_classes = ["BaseModel", "User", "State", "City", "Amenity", "Place", "Review"]
 
     def do_quit(self, line):
         """Quit command to exit the program"""
@@ -46,7 +46,7 @@ class HBNBCommand(cmd.Cmd):
         elif commands[0] not in self.available_classes:
             print("** class doesn't exist **")
         else:
-            created_instance = eval(f"commands[0]()")
+            created_instance = eval(f"{commands[0]}()")
             storage.save()
             print(created_instance.id)
 
@@ -63,7 +63,7 @@ class HBNBCommand(cmd.Cmd):
             print("** instance id missing **")
         else:
             objects = storage.all()
-            key = f"{commands[0]}.{commands[1]}"
+            key = "{}.{}".format(commands[0], commands[1])
             if key in objects:
                 print(objects[key])
             else:
@@ -82,7 +82,7 @@ class HBNBCommand(cmd.Cmd):
             print("** instance id missing **")
         else:
             objects = storage.all()
-            key = "{}.{}".format(commands[0], commands[1])
+            key = "{}.{}.format(commands[0], commands[1])"
             if key in objects:
                 del object[key]
                 storage.save()
@@ -98,13 +98,8 @@ class HBNBCommand(cmd.Cmd):
         if len(commands) == 0:
             for key, value in objects.items():
                 print(str(value))
-<<<<<<< HEAD
-        elif commands[0] not in self.available_classes:
-             print("** class doesn't exist **")
-=======
         elif commands[0] not in available_classes:
             print("** class doesn't exist **")
->>>>>>> 0ad7ead06e98af82659925dec329f08a8d84c18d
         else:
             for key, value in objects.items():
                 if key.split('.')(0) == commands[0]:
@@ -123,22 +118,20 @@ class HBNBCommand(cmd.Cmd):
             print("** instance id missing **")
         else:
             objects = storage.all()
-            key = "{}.{}".format(commands[0], commands[1])
+            key = "{}.{}.format(commands[0], commands[1])"
             if key not in objects:
                 print("** no instance found **")
             elif len(commands) < 3:
                 print("** attribute name missing **")
-            elif len(commands) < 4:
-                print("** value missing **")
             else:
                 obj = objects[key]
                 attr_name = commands[2]
                 attr_value = commands[3]
                 try:
-                    attr_value = eval[attr_name]
+                    attr_value = eval[atrr_value]
                 except Exception:
                     pass
-                setattr(obj, attr_name, attr_value)
+                setattr(obj, atrr_name, attr_value)
                 obj.save()
 
 
